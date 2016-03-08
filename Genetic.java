@@ -16,50 +16,49 @@ public class Genetic
 	static int population_size;
 	static int generations;
 	static int start_generation=0;
-    static double best_fitness;
-    static int best_solution;
-    static double crossover_rate=0.0;
-    static double mutation_rate=0.0;
-    static int child1_index;
-    static int child2_index;
-    static ArrayList<Double> normalized;
-    public static void main(String[] args)
-    {
-    	X=new ArrayList<Integer>();
-    	System.out.print("Enter the population : ");
-    	Scanner sc = new Scanner(System.in);
-    	population_size=sc.nextInt();
-    	System.out.print("Enter the Crossover rate : ");
-    	crossover_rate=sc.nextDouble();
-    	System.out.print("Enter the Mutation Rate : ");
-    	mutation_rate=sc.nextDouble();
-    	System.out.println("Enter the number of generations :");
-    	generations=sc.nextInt();
-    	for(int i=0; i<population_size; i++)
+    	static double best_fitness;
+    	static int best_solution;
+    	static double crossover_rate=0.0;
+    	static double mutation_rate=0.0;
+    	static int child1_index;
+    	static int child2_index;
+    	static ArrayList<Double> normalized;
+    	public static void main(String[] args)
     	{
-    		//Generate initial population
-    		Random random = new Random();
-    		X.add((random.nextInt(2147483647)));
-        }
-    	while(start_generation!=generations)
-    	{
-    		//Create the fitness table
-    		f(X);
-    		double sum = sum_norm(F_X);
-    		//find cumulative normalized fitness
-    		normalized_f(F_X, sum);
-    		cumm_normalized(normalized);
-    		//Perform crossover and mutation on selected individuals
-    		genetic();
-    		start_generation++;
-    		if(population_size == 1)
-    			break;
+    		X=new ArrayList<Integer>();
+    		System.out.print("Enter the population : ");
+    		Scanner sc = new Scanner(System.in);
+    		population_size=sc.nextInt();
+    		System.out.print("Enter the Crossover rate : ");
+    		crossover_rate=sc.nextDouble();
+    		System.out.print("Enter the Mutation Rate : ");
+    		mutation_rate=sc.nextDouble();
+    		System.out.println("Enter the number of generations :");
+    		generations=sc.nextInt();
+    		for(int i=0; i<population_size; i++)
+    		{
+    			//Generate initial population
+    			Random random = new Random();
+    			X.add((random.nextInt(2147483647)));
+        	}
+    		while(start_generation!=generations)
+    		{
+    			//Create the fitness table
+    			f(X);
+    			double sum = sum_norm(F_X);
+    			//find cumulative normalized fitness
+    			normalized_f(F_X, sum);
+    			cumm_normalized(normalized);
+    			//Perform crossover and mutation on selected individuals
+    			genetic();
+    			start_generation++;
+    			if(population_size == 1)
+    				break;
+    		}
+    		System.out.println("\nThe Best X is "+X.get(best_solution)+", f("+X.get(best_solution)+") = "+best_fitness);
+    		sc.close();
     	}
-    	System.out.println("\nThe Best X is "+X.get(best_solution)+", f("+X.get(best_solution)+") = "+best_fitness);
-    	sc.close();
-    }
-    
-    //Find f(x)
+    	//Find f(x)
     public static void f(ArrayList<Integer> x)
     {
     	F_X=new ArrayList<Double>();
@@ -244,9 +243,9 @@ public static int toDec(int[] inString)
 {
 	int decimal=0;
 	int i;
-    int binaryLength;
-    binaryLength = inString.length;
-    for (i = binaryLength-1, decimal = 0; i >= 0; i--) {
+    	int binaryLength;
+    	binaryLength = inString.length;
+    	for (i = binaryLength-1, decimal = 0; i >= 0; i--) {
         if (inString[i] == 1) {
             decimal += Math.pow(2, binaryLength-i-1);
         }
